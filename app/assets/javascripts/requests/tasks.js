@@ -32,9 +32,10 @@ var indexTasks = function (successCB,errorCB) {
   };
 
   var updateTask = function(id,completed,successCB,errorCB) {
+    var url = 'api/tasks/'+id+'/'+completed +'?api_key=1';
     var request = {
       type: 'PUT',
-      url: `api/tasks/${id}/${completed}?api_key=1`,
+      url: url,
       data: {
         task: {
          
@@ -48,9 +49,10 @@ var indexTasks = function (successCB,errorCB) {
 
 
   var deleteTask = function(id,successCB,errorCB) {
+    var url = 'api/tasks/'+ id +'?api_key=1'
     var request = {
       type: 'DELETE',
-      url: `api/tasks/${id}?api_key=1`,
+      url: url,
       data: {
         task: {
          
