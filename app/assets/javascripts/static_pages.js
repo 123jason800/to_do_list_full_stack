@@ -7,8 +7,9 @@ var loadTask = function() {
       return "<div class='col-12 mb-3 p-2 border rounded task "+ active + "' data-id='" + task.id + "'> \
       " + task.content + "\
       <div class='options'><button class='circle-btn' id='markTask'> </button><button class='btn delete-btn btn-danger h-100'>Remove</button></div></div>";
-    })
-    ;
+    });
+    
+    
     var category = $('.btn-group').find('.active').attr('id');
     switch (category) {
       case 'completed':
@@ -43,10 +44,16 @@ var addClickEvent = function(item,e,action) {
   
     switch(action) {
       case 'updateTask':
-        $(this).parents('.task').hasClass('active') ? updateTask(id,'mark_complete') : updateTask(id,'mark_active');
+        $(this).parents('.task').hasClass('active') ? updateTask(id,'mark_complete',function(response){
+          if(response.success) loadTask();
+       }) : updateTask(id,'mark_active',function(response){
+        if(response.success) loadTask();
+       });
         break;
       case 'deleteTask':
-        deleteTask(id);
+        deleteTask(id, function(response){
+           if(response.success) loadTask();
+        });
         break;
     }
 
@@ -62,8 +69,10 @@ $(document).on("turbolinks:load", function () {
        $("#postTask").on( "keydown", function(event) {
         var content = $("#postTask").val();
         if(event.key === 'Enter' && content.length > 0) {
-          postTask(content);
-          loadTask();
+          postTask(content, function(response) {
+            loadTask();
+          });
+         
           $("#postTask").val('');
         }
       }); 
