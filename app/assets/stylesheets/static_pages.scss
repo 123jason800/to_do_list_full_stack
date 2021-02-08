@@ -1,0 +1,158 @@
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+$red : rgb(228, 35, 35);
+$green:  rgb(16, 175, 16);
+$active:  rgba(253, 222, 222, 0.815);
+$completed: rgba(184, 250, 200, 0.815);
+$gray : rgb(61, 61, 61);
+
+@keyframes popout {
+    0% {
+      opacity: 0;
+    }
+    
+    100% {
+        
+        opacity: 1;
+    }
+}
+
+
+@mixin placeholder {
+
+    &::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        
+    }
+      
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  
+    }
+      
+    &:-ms-input-placeholder { /* Microsoft Edge */
+ 
+    }
+}
+
+.tasks-container {
+    max-width: 500px;
+}
+
+
+.static_pages,.index {
+    #tasks {
+        padding: 20px;
+        width: 500px;
+        border: 1px solid $gray;
+
+        .task {
+            position: relative;
+            &:last-child {
+                 margin-bottom: unset!important;
+            }
+           
+            &:hover .options{
+                display: block;
+                animation: popout .5s ease-in;
+            }
+            
+           .options {
+               position: absolute;
+               top: 0;
+               right: 0;
+               display: none;
+               height: 100%;
+           }
+        }
+    }
+}
+
+.circle-btn {
+    border-radius: 50%;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid gray;  
+    
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+
+
+.active {
+    background: $active;
+    .circle-btn {
+        background: $red;
+        &:hover {
+            background: $green;
+        }
+    }
+}
+
+
+
+.completed {
+    background: $completed;
+    text-decoration: line-through;
+    .circle-btn {
+        background: $green;
+        &:hover {
+            background: $red;
+        }
+    }
+}
+
+
+.input-holder {
+    padding: 20px;
+    border: 1px solid $gray;
+    margin-bottom: 20px;
+}
+
+
+
+.btn-group {
+    display: flex;
+
+    .btn-category {
+        outline: none;
+        padding: 5px 15px;
+        border: 1px solid $gray;
+        margin-right: 20px;
+        border-radius: 20px;
+        &:last-child {
+            margin-right: unset;
+        }
+
+        &:focus {
+            cursor: pointer;
+        }
+    }
+}
+
+
+#all {
+    &.active {
+        background: rgb(216, 232, 238);
+        box-shadow: 2px 2px 1px rgb(216, 232, 238);
+    }
+}
+
+#completed {
+    &.active {
+        background: $completed;
+        box-shadow: 2px 2px 1px $completed;
+    }
+}
+
+#active {
+    &.active {
+        background: $active;
+        box-shadow: 2px 2px 1px $active;
+    }
+}
