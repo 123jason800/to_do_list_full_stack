@@ -44,11 +44,17 @@ var addClickEvent = function(item,e,action) {
   
     switch(action) {
       case 'updateTask':
-        $(this).parents('.task').hasClass('active') ? updateTask(id,'mark_complete',function(response){
-          if(response.success) loadTask();
-       }) : updateTask(id,'mark_active',function(response){
-        if(response.success) loadTask();
-       });
+        if ($(this).parents('.task').hasClass('active') ) {
+          updateTask(id,'mark_complete',function(response){
+            if(response.success) loadTask();
+          });
+        }
+
+        else {
+          updateTask(id,'mark_active',function(response){
+            if(response.success) loadTask();
+           });
+        }
         break;
       case 'deleteTask':
         deleteTask(id, function(response){
@@ -85,10 +91,6 @@ $(document).on("turbolinks:load", function () {
               $('.btn-category').closest('.active').removeClass('active');
               $(this).addClass('active');
               loadTask();
-
-              
-              
-            
             }
         })
       });
