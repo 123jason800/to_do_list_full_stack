@@ -46,6 +46,7 @@ var addClickEvent = function(item,e,action) {
       case 'updateTask':
         if ($(this).parents('.task').hasClass('active') ) {
           updateTask(id,'mark_complete',function(response){
+            console.log(response.sucess);
             if(response.success) loadTask();
           });
         }
